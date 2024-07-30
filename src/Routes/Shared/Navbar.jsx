@@ -1,33 +1,22 @@
+import { Link } from "react-router-dom";
+
 const Navbar = () => {
   const navLinks = (
     <>
-      <li>
-        <a>Item 1</a>
-      </li>
-      <li>
-        <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li>
-              <a>Submenu 1</a>
-            </li>
-            <li>
-              <a>Submenu 2</a>
-            </li>
-          </ul>
-        </details>
-      </li>
-      <li>
-        <a>Item 3</a>
-      </li>
+      <li className="text-2xl text-yellow-400 "><Link to='/'>Home</Link></li>
+      <li className="text-2xl"><Link to='/menu'>Our Menu</Link></li>
     </>
   );
   return (
     <>
-      <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white max-w-screen-xl">
+      <div className="navbar fixed z-10 bg-opacity-40 bg-black text-white max-w-screen-xl">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-primary lg:hidden"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -45,12 +34,14 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content shadow  rounded-box z-[1] mt-3 w-52 p-2 "
             >
               {navLinks}
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">Bistro Boss</a>
+          <Link to="/" className="btn btn-ghost text-2xl">
+            Bistro Boss <br /> Restaurant
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>

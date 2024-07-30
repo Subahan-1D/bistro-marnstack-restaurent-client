@@ -31,12 +31,12 @@ const Testimonials = () => {
           {reviews.map((review) => (
             <SwiperSlide key={review._id}>
               <div className="my-16 mx-20 space-y-2 flex flex-col items-center ">
-                <RiDoubleQuotesL />
                 <Rating
                   style={{ maxWidth: 180 }}
                   value={review.rating}
                   readOnly
                 />
+                <RiDoubleQuotesL className="text-8xl" />
                 <p className="py-4">{review.details}</p>
                 <h3 className="text-3xl text-yellow-500">{review.name}</h3>
               </div>

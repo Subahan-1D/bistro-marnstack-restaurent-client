@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
     const navLinks = (
       <>
-        <li className="text-2xl text-yellow-400 ">
-          <Link to="/">Home</Link>
-        </li>
-        <li className="text-2xl">
-          <Link to="/menu">Our Menu</Link>
-        </li>
+        <Link to="/" className="text-2xl text-yellow-400 ">
+          Home
+        </Link>
+        <Link to="/menu" className="text-2xl ml-5">
+          Our Menu
+        </Link>
       </>
     );
 
   return (
     <>
-      <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl bg-black text-white">
+      <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl bg-black lg:text-white md:text-white sm:text-black">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost lg:hidden">
+            <label tabIndex={0} className=" lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -35,12 +35,12 @@ const Navbar = () => {
             </label>
             <ul
               tabIndex={0}
-              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-200 rounded-box w-52"
             >
               {navLinks}
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-2xl">Bistro Boss <br /> Restaurant</Link>
+          <Link className=" normal-case text-xl">Bistro Boss</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>

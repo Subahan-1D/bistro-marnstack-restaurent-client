@@ -15,7 +15,7 @@ const MenuCover = ({ img, title }) => {
             <h1 className="mb-5 text-5xl w-[620px]  font-bold text-gray-300 uppercase">
               {title}
             </h1>
-            <p className="">Would you like to try a dish?</p>
+            <p className="ml-10 uppercase">Would you like to try a dish?</p>
           </div>
         </div>
       </div>

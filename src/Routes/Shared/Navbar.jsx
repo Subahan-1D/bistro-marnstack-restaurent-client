@@ -9,6 +9,9 @@ const Navbar = () => {
         <Link to="/menu" className="text-2xl ml-5">
           Our Menu
         </Link>
+        <Link to="/shop/salad" className="text-2xl ml-5">
+          Our Shop
+        </Link>
       </>
     );
 

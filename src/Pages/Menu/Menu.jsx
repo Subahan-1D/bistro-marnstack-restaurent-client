@@ -4,10 +4,11 @@ import img from "../../assets/menu/banner3.jpg";
 import useMenu from "../../hooks/useMenu";
 import SectionTitle from "../../components/SectionTitle";
 import MenuCategory from "./MenuCategory";
-import MenuDesserts from "./MenuDesserts";
-import MenuPizza from "./MenuPizza";
-import MenuSalad from "./MenuSalad";
-import MenuSoups from "./MenuSoups";
+import dessertImg from "../../assets/menu/dessert-bg.jpeg"
+import pizzaImg from "../../assets/menu/pizza-bg.jpg"
+import saladImg from "../../assets/menu/salad-bg.jpg"
+import soupImg from "../../assets/menu/soup-bg.jpg"
+import { Link } from "react-router-dom";
 const Menu = () => {
   const [menu] = useMenu();
   const desserts = menu.filter((item) => item.category === "dessert");
@@ -18,7 +19,7 @@ const Menu = () => {
   return (
     <div>
       <Helmet>
-        <title>Bistro Restaurant | menu</title>
+        <title>Bistro Restaurant | Menu</title>
       </Helmet>
       <MenuCover img={img} title="OUR MENU"></MenuCover>
       <SectionTitle
@@ -26,11 +27,15 @@ const Menu = () => {
         heading="TODAY'S OFFER"
       ></SectionTitle>
       <MenuCategory items={offered}></MenuCategory>
-      <MenuDesserts items={desserts}></MenuDesserts>
-      <MenuPizza items={pizza}></MenuPizza>
-      <MenuSalad items={salad}></MenuSalad>
-      <MenuSoups items={soup}></MenuSoups>
-      
+      {/* desserts menu items */}
+      <MenuCategory items={desserts}title={"desserts"}image={dessertImg}  ></MenuCategory>
+      {/* pizza menu items */}
+      <MenuCategory items={pizza} title={"pizzas"} image={pizzaImg}></MenuCategory>
+      {/* salad menu items */}
+      <MenuCategory
+        items={salad}title={"salads"} image={saladImg} ></MenuCategory>
+      {/* soups menu items */}
+      <MenuCategory items={soup} title={"soups"} image={soupImg}></MenuCategory>
     </div>
   );
 };

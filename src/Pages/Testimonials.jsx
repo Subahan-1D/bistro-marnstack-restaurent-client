@@ -17,9 +17,9 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 const Testimonials = () => {
     const [reviews , setReviews] = useState([])
     useEffect(()=>{
-        fetch('reviews.json')
-        .then(res => res.json())
-        .then(data => setReviews(data))
+        fetch("http://localhost:9000/reviews")
+          .then((res) => res.json())
+          .then((data) => setReviews(data));
     },[])
     return (
       <section className="my-20">

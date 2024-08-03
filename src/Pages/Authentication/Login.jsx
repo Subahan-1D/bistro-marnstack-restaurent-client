@@ -1,17 +1,35 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import {
+  loadCaptchaEnginge,
+  LoadCanvasTemplate,
+  validateCaptcha,
+} from "react-simple-captcha";
 const Login = () => {
-  const [showPassword,setShowPassword] = useState()
-  const handleLogin = e =>{
-    e.preventDefault()
+  const captchaRef = useRef(null);
+  const [showPassword, setShowPassword] = useState();
+  const [disabled, setDisabled] = useState(true);
+  useEffect(() => {
+    loadCaptchaEnginge(6);
+  }, []);
+
+  const handleLogin = (e) => {
+    e.preventDefault();
     const from = e.target;
     const email = from.email.value;
-    const  password = from.password.value;
-    console.log(email,password)
-
-  }
+    const password = from.password.value;
+    console.log(email, password);
+  };
+  const handleValidateCaptcha = () => {
+    const user_captcha_value = captchaRef.current.value;
+    console.log(user_captcha_value);
+    if (validateCaptcha(user_captcha_value)) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)]">
       <div className="flex w-full my-20 max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
@@ -105,12 +123,32 @@ const Login = () => {
                 {showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
               </span>
             </div>
-            <div className="mt-6">
+            <div className="form-control">
+              <label className="label">
+                <LoadCanvasTemplate />
+              </label>
+              <input
+                ref={captchaRef}
+                type="text"
+                name="captcha"
+                placeholder="type the captcha above"
+                className="input input-bordered"
+                required
+              />
+              <button
+                onClick={handleValidateCaptcha}
+                className=" btn btn-outline btn-xs mt-2"
+              >
+                Validate
+              </button>
+            </div>
+            <div className="  mt-6">
               <button
                 type="submit"
-                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+                className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white btn btn-primary"
+                disabled={disabled}
               >
-                Sign In
+                Login
               </button>
             </div>
           </form>

@@ -11,11 +11,11 @@ const PrivateRoute = ({ children }) => {
         <span className="loading loading-spinner text-secondary loading-lg"></span>
       </div>
     );
-  if (user) return children;
+  if (user) {
+    return children;
+  }
 
-  return (
-    <Navigate to="/login" state={{from : location}} replace></Navigate>
-  );
+  return <Navigate to="/login" state={{from:location}} replace></Navigate>;
 };
 
 export default PrivateRoute;

@@ -11,32 +11,20 @@ import bgImg from "../../assets/others/authentication2.png";
 import img from "../../assets/logo.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 const Login = () => {
+  const [disabled, setDisabled] = useState(true);
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState();
-  const [disabled, setDisabled] = useState(true);
-  const navigate = useNavigate('/');
+  const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
+  console.log("state in the location in the login page", location.state);
 
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
-
-
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      toast.success("SignIn Successful");
-      navigate("/");
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
-    }
-  };
-
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -56,7 +44,7 @@ const Login = () => {
           popup: "animate__animated animate__fadeOutDown",
         },
       });
-      navigate('/');
+      navigate(from, { replace: true });
     });
   };
   const handleValidateCaptcha = (e) => {
@@ -66,6 +54,17 @@ const Login = () => {
       setDisabled(false);
     } else {
       setDisabled(true);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success("SignIn Successful");
+     navigate(from, { replace: true });
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
     }
   };
   return (
@@ -113,7 +112,10 @@ const Login = () => {
                 </svg>
               </div>
 
-              <button onClick={handleGoogleSignIn} className="w-5/6 px-4 py-3 font-bold text-center">
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-5/6 px-4 py-3 font-bold text-center"
+              >
                 Sign in with Google
               </button>
             </div>

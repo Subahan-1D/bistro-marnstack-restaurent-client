@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import { useContext, useEffect, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   loadCaptchaEnginge,
   LoadCanvasTemplate,
@@ -11,13 +11,32 @@ import bgImg from "../../assets/others/authentication2.png";
 import img from "../../assets/logo.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState();
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate('/');
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
   useEffect(() => {
     loadCaptchaEnginge(6);
   }, []);
+
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success("SignIn Successful");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  };
+
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -25,19 +44,19 @@ const Login = () => {
     const email = from.email.value;
     const password = from.password.value;
     console.log(email, password);
-    signIn(email, password)
-    .then((result) => {
+    signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
       Swal.fire({
         title: " User Login Successful .",
         showClass: {
-          popup: 'animate__animated animate__fadeInUp ',
+          popup: "animate__animated animate__fadeInUp ",
         },
         hideClass: {
-          popup:'animate__animated animate__fadeOutDown'
+          popup: "animate__animated animate__fadeOutDown",
         },
       });
+      navigate('/');
     });
   };
   const handleValidateCaptcha = (e) => {
@@ -94,9 +113,9 @@ const Login = () => {
                 </svg>
               </div>
 
-              <span className="w-5/6 px-4 py-3 font-bold text-center">
+              <button onClick={handleGoogleSignIn} className="w-5/6 px-4 py-3 font-bold text-center">
                 Sign in with Google
-              </span>
+              </button>
             </div>
 
             <div className="flex items-center justify-between mt-4">

@@ -22,12 +22,17 @@ const Navbar = () => {
           Our Shop
         </Link>
       </li>
+      <li>
+        <Link to="/screet" className="text-2xl ml-5">
+          Screet
+        </Link>
+      </li>
 
       {user ? (
         <>
           <li>
             <Link to="/" onClick={logOut} className="text-2xl ml-5">
-              Logout   
+              Logout
             </Link>
           </li>
         </>
@@ -74,9 +79,24 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navLinks}</ul>
         </div>
-        <div className="navbar-end">
-          <a className="btn">Get started</a>
-        </div>
+        {/* conditional rendering */}
+        {user && (
+          <div className="dropdown dropdown-end z-50">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <div className="w-10 rounded-full" title={user?.displayName}>
+                <img
+                  referrerPolicy="no-referrer"
+                  alt="User Profile Photo"
+                  src={user?.photoURL}
+                />
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

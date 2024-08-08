@@ -7,34 +7,43 @@ import Shop from "../Pages/Order/Shop";
 import ErrorPage from "../Pages/ErrorPage";
 import Login from "../Pages/Authentication/Login";
 import Registration from "../Pages/Authentication/Registration";
+import PrivateRoute from "./PrivateRoute";
+import Screet from "../Pages/Screet";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement:<ErrorPage></ErrorPage>,
-    children:[
-       {
-        path:'/',
-        element:<Home></Home>
-       },
-       {
-        path:"/menu",
-        element:<Menu></Menu>
-       },
-       {
-        path:"/shop/:category",
-        element:<Shop></Shop>
-       },
-       {
-        path:"/login",
-        element:<Login></Login>
-       },
-       {
-        path:"/registration",
-        element:<Registration></Registration>
-       },
-       
-    ]
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        path: "/",
+        element: <Home></Home>,
+      },
+      {
+        path: "/menu",
+        element: <Menu></Menu>,
+      },
+      {
+        path: "/shop/:category",
+        element: <Shop></Shop>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/registration",
+        element: <Registration></Registration>,
+      },
+      {
+        path: "/screet",
+        element: (
+          <PrivateRoute>
+            <Screet></Screet>
+          </PrivateRoute>
+        ),
+      },
+    ],
   },
 ]);

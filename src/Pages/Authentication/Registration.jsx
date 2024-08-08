@@ -1,17 +1,20 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bgImg from "../../assets/others/authentication1.png";
 import img from "../../assets/logo.png";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Registration = () => {
-  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate()
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const [showPassword, setShowPassword] = useState();
@@ -20,6 +23,22 @@ const Registration = () => {
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
+      updateUserProfile(data.photo, data.photo)
+        .then(() => {
+          console.log("user profile photo update");
+          reset();
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "User create successful",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/')
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     });
   };
   return (
@@ -105,10 +124,13 @@ const Registration = () => {
                   id="photo"
                   autoComplete="photo"
                   name="photo"
-                  {...register("photo")}
+                  {...register("photo", { required: true })}
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="text"
-                />
+                />{" "}
+                {errors.photo?.type === "required" && (
+                  <p className="text-red-600">photo url is not required</p>
+                )}
               </div>
               <div className="mt-4">
                 <label

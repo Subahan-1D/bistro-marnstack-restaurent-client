@@ -7,10 +7,12 @@ import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Registration = () => {
-  const navigate = useNavigate()
-  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { createUser, updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -34,12 +36,22 @@ const Registration = () => {
             showConfirmButton: false,
             timer: 1500,
           });
-          navigate('/')
+          navigate("/");
         })
         .catch((error) => {
           console.log(error);
         });
     });
+  };
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithGoogle();
+      toast.success("SignIn Successful");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
   };
   return (
     <>
@@ -79,9 +91,12 @@ const Registration = () => {
                 </svg>
               </div>
 
-              <span className="w-5/6 px-4 py-3 font-bold text-center">
+              <button
+                onClick={handleGoogleSignIn}
+                className="w-5/6 px-4 py-3 font-bold text-center"
+              >
                 Sign in with Google
-              </span>
+              </button>
             </div>
 
             <div className="flex items-center justify-between mt-4">

@@ -28,23 +28,25 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    const from = e.target;
-    const email = from.email.value;
-    const password = from.password.value;
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
     console.log(email, password);
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
-      Swal.fire({
-        title: " User Login Successful .",
-        showClass: {
-          popup: "animate__animated animate__fadeInUp ",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutDown",
-        },
-      });
-      navigate(from, { replace: true });
+     if(user){
+       Swal.fire({
+         title: " User Login Successful .",
+         showClass: {
+           popup: "animate__animated animate__fadeInUp ",
+         },
+         hideClass: {
+           popup: "animate__animated animate__fadeOutDown",
+         },
+       });
+       navigate(from, { replace: true });
+     }
     });
   };
   const handleValidateCaptcha = (e) => {

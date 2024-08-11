@@ -1,5 +1,4 @@
-
-import { createBrowserRouter, } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../Pages/Home";
 import Menu from "../Pages/Menu/Menu";
@@ -50,13 +49,16 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
     errorElement: <ErrorPage></ErrorPage>,
-    children : [
+    element: <PrivateRoute>
+      <Dashboard></Dashboard>
+    </PrivateRoute>,
+
+    children: [
       {
-        path: 'cart',
-        element:<Cart></Cart>
-      }
-    ]
+        path: "cart",
+        element: <Cart></Cart>,
+      },
+    ],
   },
 ]);

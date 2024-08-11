@@ -8,8 +8,10 @@ import { Helmet } from "react-helmet";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Registration = () => {
+  const axiosPublic = useAxiosPublic();
   const navigate = useNavigate();
   const { createUser, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
@@ -21,22 +23,30 @@ const Registration = () => {
   } = useForm();
   const [showPassword, setShowPassword] = useState();
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password).then((result) => {
       const loggedUser = result.user;
       console.log(loggedUser);
-      updateUserProfile(data.photo, data.photo)
+      updateUserProfile(data.name, data.photo)
         .then(() => {
-          console.log("user profile photo update");
-          reset();
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "User create successful",
-            showConfirmButton: false,
-            timer: 1500,
+          //  create user entry in the database
+          const userInfo = {
+            name: data.name,
+            email: data.email,
+          };
+          axiosPublic.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log('user added to the database')
+              reset();
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "User create successful",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate("/");
+            }
           });
-          navigate("/");
         })
         .catch((error) => {
           console.log(error);

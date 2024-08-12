@@ -1,6 +1,5 @@
 import { BsShop } from "react-icons/bs";
 import {
-  FaAd,
   FaBook,
   FaCalendar,
   FaHome,
@@ -13,11 +12,12 @@ import {
 import { MdMenuOpen, MdOutlineEmail } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useAdmin from "../hooks/useAdmin";
 
 const Dashboard = () => {
   const [cart] = useCart();
   // TODO :  get isAdmin value from database
-  const isAdmin = true;
+  const [isAdmin] = useAdmin();
 
   return (
     <div className="flex ">

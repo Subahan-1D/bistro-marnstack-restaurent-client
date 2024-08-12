@@ -12,7 +12,9 @@ import img from "../../assets/logo.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
+  const axiosPublic = useAxiosPublic()
   const [disabled, setDisabled] = useState(true);
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState();
@@ -59,16 +61,23 @@ const Login = () => {
     }
   };
 
-  const handleGoogleSignIn = async () => {
-    try {
-      await signInWithGoogle();
-      toast.success("SignIn Successful");
-     navigate(from, { replace: true });
-    } catch (err) {
-      console.log(err);
-      toast.error(err?.message);
-    }
-  };
+ const handleGoogleSignIn = async () => {
+   try {
+     const result = await signInWithGoogle();
+     const userInfo = {
+       email: result.user?.email,
+       name: result.user?.displayName,
+     };
+    axiosPublic.post("/users", userInfo).then((res) => {
+       console.log(res.data);
+     });
+     toast.success("SignIn Successful");
+     navigate("/");
+   } catch (err) {
+     console.log(err);
+     toast.error(err?.message);
+   }
+ };
   return (
     <>
       <Helmet>

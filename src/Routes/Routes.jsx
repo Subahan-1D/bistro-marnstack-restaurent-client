@@ -11,6 +11,8 @@ import Screet from "../Pages/Screet";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Pages/Dashboard/Cart";
 import AllUsers from "../Layout/Dashboard/AllUsers/AllUsers";
+import AddItems from "../Pages/Dashboard/AddItems/AddItems";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -51,21 +53,36 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     errorElement: <ErrorPage></ErrorPage>,
-    element: <PrivateRoute>
-      <Dashboard></Dashboard>
-    </PrivateRoute>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
 
     children: [
+      // normal routes
       {
         path: "cart",
         element: <Cart></Cart>,
       },
 
-      // admin routes
+      // admin only  routes
       {
-        path:'users',
-        element:<AllUsers></AllUsers>
-      }
+        path: "addItems",
+        element: (
+          <AdminRoute>
+            <AddItems></AddItems>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <AdminRoute>
+            <AllUsers></AllUsers>
+          </AdminRoute>
+        ),
+      },
     ],
   },
 ]);

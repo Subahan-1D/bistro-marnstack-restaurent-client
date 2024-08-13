@@ -63,7 +63,7 @@ const AllUsers = () => {
           {/* head */}
           <thead>
             <tr className="text-2xl text-black">
-              <th>#</th>
+              <th></th>
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>

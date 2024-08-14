@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Cart = () => {
-  const [cart , refecth] = useCart();
+  const [cart, refecth] = useCart();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
   const axiosSecure = useAxiosSecure();
   const handleDelete = (id) => {

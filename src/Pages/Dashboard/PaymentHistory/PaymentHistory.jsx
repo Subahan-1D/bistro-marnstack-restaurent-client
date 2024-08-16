@@ -37,13 +37,13 @@ const PaymentHistory = () => {
                 <td>
                   <div className="flex items-center gap-3">
                     <div>
-                      <div className="font-bold">{payment.price}</div>
+                      <div className="font-bold text-green-600">{payment.price}</div>
                     </div>
                   </div>
                 </td>
-                <td>{payment.transitionId}</td>
-                <td>{payment.status}</td>
-                <td>{payment.date}</td>
+                <td className="text-red-600">{payment.transitionId}</td>
+                <td className="text-blue-600">{payment.status}</td>
+                <td className="text-yellow-500">{payment.date}</td>
               </tr>
             ))}
           </tbody>

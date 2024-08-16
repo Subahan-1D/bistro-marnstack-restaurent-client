@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useCart from "../../../hooks/useCart";
 import useAuth from "../../../hooks/useAuth";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutFrom = () => {
   const { user } = useAuth();
@@ -12,16 +14,19 @@ const CheckOutFrom = () => {
   const stripe = useStripe();
   const elements = useElements();
   const axiosSecure = useAxiosSecure();
-  const [cart] = useCart();
+  const [cart, refecth] = useCart();
+  const navigate = useNavigate();
   const totalPrice = cart.reduce((total, item) => total + item.price, 0);
 
   useEffect(() => {
-    axiosSecure
-      .post("/create-payment-intent", { price: totalPrice })
-      .then((res) => {
-        console.log(res.data.clientSecret);
-        setClientSecret(res.data.clientSecret);
-      });
+    if (totalPrice > 0) {
+      axiosSecure
+        .post("/create-payment-intent", { price: totalPrice })
+        .then((res) => {
+          console.log(res.data.clientSecret);
+          setClientSecret(res.data.clientSecret);
+        });
+    }
   }, [axiosSecure, totalPrice]);
 
   const handleSubmit = async (event) => {
@@ -70,7 +75,7 @@ const CheckOutFrom = () => {
       setTransitionId(paymentIntent.id);
 
       // now save the payment in the database
-      
+
       const payment = {
         email: user.email,
         price: totalPrice,
@@ -80,9 +85,13 @@ const CheckOutFrom = () => {
         menuItemIds: cart.map((item) => item.menuId),
         status: "pending",
       };
-     const res = await axiosSecure.post('/payments', payment)
-     console.log('payment save', res.data)
-
+      const res = await axiosSecure.post("/payments", payment);
+      console.log("payment save", res.data);
+      refecth();
+      if (res.data?.paymentResult?.insertedId) {
+        toast.success("Thank you for payment");
+        navigate('/dashboard/paymentHistory')
+      }
     }
   };
   return (

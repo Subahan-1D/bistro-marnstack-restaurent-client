@@ -8,7 +8,7 @@ const Main = () => {
   const noHeaderFooter =
     location.pathname.includes("login") || location.pathname.includes("registration");
   return (
-    <div>
+    <div className="font-lato">
      {noHeaderFooter  || <Navbar></Navbar>}
       <Outlet></Outlet>
       {noHeaderFooter  || <Footer></Footer>}

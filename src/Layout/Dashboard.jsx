@@ -23,7 +23,7 @@ const Dashboard = () => {
     <div className="flex ">
       {/* side bar */}
       <div className="w-64 min-h-screen bg-orange-400">
-        <ul className="menu p-4 text-xl">
+        <ul className="menu p-4 text-xl font-lato">
           {isAdmin ? (
             <>
               <li>
@@ -120,7 +120,7 @@ const Dashboard = () => {
         </ul>
       </div>
       {/* dashboard content */}
-      <div className="flex-1 p-8">
+      <div className="flex-1 p-8 font-lato">
         <Outlet></Outlet>
       </div>
     </div>

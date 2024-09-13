@@ -18,7 +18,7 @@ const Shop = () => {
   const pizza = menu.filter((item) => item.category === "pizza");
   const drinks = menu.filter((item) => item.category === "drinks");
   return (
-    <div>
+    <div className="font-lato">
       <MenuCover img={img} title="order food"></MenuCover>
       <Tabs
         className="my-10"

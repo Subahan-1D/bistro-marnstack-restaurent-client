@@ -86,13 +86,13 @@ const AdminHome = () => {
     return {name : data.category, value: data.revenue}
   })
   return (
-    <div>
+    <div className="font-lato">
       <h2 className="text-3xl ">
         <span className="font-mono">Hi , Welcome </span>
         {user?.displayName ? user.displayName : "Back"}
       </h2>
 
-      <div className="stats shadow mt-5">
+      <div className="stats shadow mt-5 mr-10">
         <div className="stat">
           <div className="stat-figure text-secondary">
             <FaDollarSign className="text-4xl"></FaDollarSign>

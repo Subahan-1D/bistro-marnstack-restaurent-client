@@ -88,7 +88,7 @@ const AdminHome = () => {
   return (
     <div className="font-lato">
       <h2 className="text-3xl ">
-        <span className="font-mono">Hi , Welcome </span>
+        <span className="font-mono text-red-600">Hi , Welcome </span>
         {user?.displayName ? user.displayName : "Back"}
       </h2>
 
@@ -97,7 +97,7 @@ const AdminHome = () => {
           <div className="stat-figure text-secondary">
             <FaDollarSign className="text-4xl"></FaDollarSign>
           </div>
-          <div className="stat-title text-center text-2xl">Revenue</div>
+          <div className="stat-title text-center text-xl">Revenue</div>
           <div className="stat-value">${stats.revenue}</div>
         </div>
 
@@ -165,7 +165,7 @@ const AdminHome = () => {
           </BarChart>
         </div>
         <div className="w-1/2">
-          <PieChart width={400} height={400}>
+          <PieChart width={300} height={300}>
             <Pie
               data={pieChartData}
               cx="50%"

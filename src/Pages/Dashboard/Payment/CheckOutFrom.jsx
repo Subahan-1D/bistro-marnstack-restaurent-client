@@ -90,7 +90,7 @@ const CheckOutFrom = () => {
       refecth();
       if (res.data?.paymentResult?.insertedId) {
         toast.success("Thank you for payment");
-        navigate('/dashboard/paymentHistory')
+        navigate("/dashboard/paymentHistory");
       }
     }
   };

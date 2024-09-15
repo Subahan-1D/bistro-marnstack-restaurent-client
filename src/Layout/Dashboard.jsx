@@ -1,7 +1,5 @@
 import { BsShop } from "react-icons/bs";
 import {
-  FaBook,
-  FaCalendar,
   FaHome,
   FaList,
   FaShoppingCart,
@@ -23,7 +21,7 @@ const Dashboard = () => {
     <div className="flex ">
       {/* side bar */}
       <div className="w-64 min-h-screen bg-orange-400">
-        <ul className="menu p-4 text-xl font-lato">
+        <ul className="menu p-4 text-xl ">
           {isAdmin ? (
             <>
               <li>
@@ -45,12 +43,6 @@ const Dashboard = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard/bookings">
-                  <FaBook></FaBook>
-                  Manage Bookings
-                </NavLink>
-              </li>
-              <li>
                 <NavLink to="/dashboard/users">
                   <FaUsers></FaUsers>
                   All Users
@@ -65,16 +57,11 @@ const Dashboard = () => {
                   User Home
                 </NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/reservation">
-                  <FaCalendar></FaCalendar>
-                  Reservation
-                </NavLink>
-              </li>
+             
               <li>
                 <NavLink to="/dashboard/cart">
                   <FaShoppingCart></FaShoppingCart>
-                  My Cart ({cart.length})
+                  My Cart 
                 </NavLink>
               </li>
               <li>
@@ -120,7 +107,7 @@ const Dashboard = () => {
         </ul>
       </div>
       {/* dashboard content */}
-      <div className="flex-1 p-8 font-lato">
+      <div className="flex-1 p-4 font-lato">
         <Outlet></Outlet>
       </div>
     </div>

@@ -19,6 +19,7 @@ import Payment from "../Pages/Dashboard/Payment/Payment";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory/PaymentHistory";
 import AdminHome from "../Pages/Dashboard/AdminHome/AdminHome";
 import UserHome from "../Pages/Dashboard/UserHome/UserHome";
+import AddReview from "../Pages/Dashboard/UserHome/AddReview";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,10 @@ export const router = createBrowserRouter([
         path: "paymentHistory",
         element: <PaymentHistory></PaymentHistory>,
       },
+      {
+        path: "review",
+        element: <AddReview></AddReview>,
+      },
 
       // admin only  routes
       {
@@ -125,7 +130,7 @@ export const router = createBrowserRouter([
           </AdminRoute>
         ),
         loader: ({ params }) =>
-          fetch(`https://bistro-boss-restaurent-server-rho.vercel.app/menu/${params.id}`),
+          fetch(`http://localhost:9000/menu/${params.id}`),
       },
     ],
   },

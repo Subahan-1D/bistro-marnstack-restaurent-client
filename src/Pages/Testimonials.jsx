@@ -17,7 +17,7 @@ import { RiDoubleQuotesL } from "react-icons/ri";
 const Testimonials = () => {
     const [reviews , setReviews] = useState([])
     useEffect(()=>{
-        fetch("https://bistro-boss-restaurent-server-rho.vercel.app/reviews")
+        fetch("http://localhost:9000/reviews")
           .then((res) => res.json())
           .then((data) => setReviews(data));
     },[])

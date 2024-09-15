@@ -5,7 +5,7 @@ import MenuDetails from "./MenuDetails";
 const MenuCard = () => {
   const [card, setCard] = useState([]);
   useEffect(() => {
-    fetch("https://bistro-boss-restaurent-server-rho.vercel.app/menu")
+    fetch("http://localhost:9000/menu")
       .then((res) => res.json())
       .then((data) => {
         const popularItems = data.filter((item) => item.category === "dessert");

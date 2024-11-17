@@ -7,14 +7,14 @@ import {
   LoadCanvasTemplate,
   validateCaptcha,
 } from "react-simple-captcha";
-import bgImg from "../../assets/others/authentication2.png";
+import bgImg from "../../assets/login.jpg";
 import img from "../../assets/logo.png";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 const Login = () => {
-  const axiosPublic = useAxiosPublic()
+  const axiosPublic = useAxiosPublic();
   const [disabled, setDisabled] = useState(true);
   const { signIn, signInWithGoogle } = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState();
@@ -37,18 +37,18 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
-     if(user){
-       Swal.fire({
-         title: " User Login Successful .",
-         showClass: {
-           popup: "animate__animated animate__fadeInUp ",
-         },
-         hideClass: {
-           popup: "animate__animated animate__fadeOutDown",
-         },
-       });
-       navigate(from, { replace: true });
-     }
+      if (user) {
+        Swal.fire({
+          title: " User Login Successful .",
+          showClass: {
+            popup: "animate__animated animate__fadeInUp ",
+          },
+          hideClass: {
+            popup: "animate__animated animate__fadeOutDown",
+          },
+        });
+        navigate(from, { replace: true });
+      }
     });
   };
   const handleValidateCaptcha = (e) => {
@@ -61,27 +61,27 @@ const Login = () => {
     }
   };
 
- const handleGoogleSignIn = async () => {
-   try {
-     const result = await signInWithGoogle();
-     const userInfo = {
-       email: result.user?.email,
-       name: result.user?.displayName,
-     };
-    axiosPublic.post("/users", userInfo).then((res) => {
-       console.log(res.data);
-     });
-     toast.success("SignIn Successful");
-     navigate("/");
-   } catch (err) {
-     console.log(err);
-     toast.error(err?.message);
-   }
- };
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      const userInfo = {
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+      });
+      toast.success("SignIn Successful");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  };
   return (
     <>
       <Helmet>
-        <title>Bistro Restaurant | Login </title>
+        <title>Delicious Restaurant| Login </title>
       </Helmet>
       <div className="flex justify-center items-center min-h-[calc(100vh-306px)] font-lato">
         <div className="flex w-full my-20 max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
@@ -151,6 +151,7 @@ const Login = () => {
                 <input
                   id="LoggingEmailAddress"
                   autoComplete="email"
+                  placeholder="E-mail"
                   name="email"
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="email"
@@ -194,6 +195,14 @@ const Login = () => {
                   disabled={disabled}
                 >
                   Login
+                </button>
+              </div>
+              <div className="  mt-6">
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white btn btn-secondary"
+                >
+                  <Link to="/">Cancel</Link>
                 </button>
               </div>
             </form>

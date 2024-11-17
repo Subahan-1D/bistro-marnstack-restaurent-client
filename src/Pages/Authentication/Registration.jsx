@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import bgImg from "../../assets/others/authentication1.png";
+import bgImg from "../../assets/registration.jpg";
 import img from "../../assets/logo.png";
 import { useForm } from "react-hook-form";
 import { Helmet } from "react-helmet";
@@ -35,7 +35,7 @@ const Registration = () => {
           };
           axiosPublic.post("/users", userInfo).then((res) => {
             if (res.data.insertedId) {
-              console.log('user added to the database')
+              console.log("user added to the database");
               reset();
               Swal.fire({
                 position: "top-end",
@@ -55,18 +55,16 @@ const Registration = () => {
   };
   const handleGoogleSignIn = async () => {
     try {
-     const result =  await signInWithGoogle();
+      const result = await signInWithGoogle();
       const userInfo = {
-        email : result.user?.email,
-        name : result.user?.displayName
-      }
-      axiosPublic.post('/users', userInfo)
-      .then(res =>{
-        console.log(res.data)
-      })
+        email: result.user?.email,
+        name: result.user?.displayName,
+      };
+      axiosPublic.post("/users", userInfo).then((res) => {
+        console.log(res.data);
+      });
       toast.success("SignIn Successful");
       navigate("/");
-
     } catch (err) {
       console.log(err);
       toast.error(err?.message);
@@ -75,7 +73,7 @@ const Registration = () => {
   return (
     <>
       <Helmet>
-        <title>Bistro Restaurant | Registration</title>
+        <title>Delicious Restaurant | Registration</title>
       </Helmet>
       <div className="flex justify-center items-center min-h-[calc(100vh-306px)] font-lato">
         <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
@@ -138,6 +136,7 @@ const Registration = () => {
                 <input
                   id="name"
                   autoComplete="name"
+                  placeholder="Name"
                   {...register("name", { required: true })}
                   name="name"
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
@@ -158,6 +157,7 @@ const Registration = () => {
                   id="photo"
                   autoComplete="photo"
                   name="photo"
+                  placeholder="photoURL"
                   {...register("photo", { required: true })}
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                   type="text"
@@ -176,6 +176,7 @@ const Registration = () => {
                 <input
                   id="LoggingEmailAddress"
                   autoComplete="email"
+                  placeholder="E-mail"
                   name="email"
                   {...register("email", { required: true })}
                   className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
@@ -212,9 +213,17 @@ const Registration = () => {
               <div className="  mt-6">
                 <input
                   type="submit"
-                  className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white btn btn-primary"
+                  className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white btn btn-secondary"
                   value="Registration"
                 ></input>
+              </div>
+              <div className="  mt-6">
+                <button
+                  type="submit"
+                  className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white btn btn-primary"
+                >
+                  <Link to="/">Cancel</Link>
+                </button>
               </div>
             </form>
 

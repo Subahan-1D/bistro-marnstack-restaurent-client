@@ -1,5 +1,3 @@
-
-
 const Footer = () => {
   return (
     <>
@@ -9,7 +7,7 @@ const Footer = () => {
           <div className="flex flex-col items-center text-center">
             <div className="flex gap-2 items-center">
               <img className="w-auto h-7" src="" alt="" />
-              <span>Bistro boss 👑 Restaurant </span>
+              <span> Delicious Restaurant 👑 </span>
             </div>
 
             <div className="flex flex-wrap justify-center mt-6 -mx-4">

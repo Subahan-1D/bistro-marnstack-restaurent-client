@@ -55,19 +55,22 @@ const MenuDetails = ({ item }) => {
   };
 
   return (
-    <div  className="font-lato">
-      <div className="card card-compact bg-base-100 w-96 shadow-xl">
+    
+    <div className="font-lato">
+      <div className="card card-compact bg-base-100 w-96 shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out relative">
         <figure>
-          <img src={image} alt="food" />
+          <img src={image} alt="food" className="rounded-lg" />
         </figure>
-        <p className="absolute right-0 mr-4 mt-4 px-2 bg-slate-900 text-white">
+        <p className="absolute top-4 right-4 px-4 py-2 bg-black bg-opacity-75 text-white font-semibold rounded-lg shadow-md">
           $ {price}{" "}
         </p>
-        <div className="card-body items-center text-center bg-slate-50">
-          <h2 className="card-title">{name}</h2>
-          <p>{recipe}</p>
+        <div className="card-body items-center text-center bg-white rounded-b-lg p-6">
+          <h2 className="card-title text-xl font-bold text-gray-800 hover:text-yellow-500 transition-colors duration-300">
+            {name}
+          </h2>
+          <p className="text-gray-600 mb-4">{recipe}</p>
           <div className="card-actions">
-            <button
+          <button
               onClick={handleAddToCart}
               className="btn btn-outline bg-slate-200 border-0 border-b-4 text-yellow-600"
             >

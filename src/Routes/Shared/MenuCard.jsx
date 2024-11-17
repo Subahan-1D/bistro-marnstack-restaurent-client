@@ -15,11 +15,15 @@ const MenuCard = () => {
   return (
     <div>
       <section>
-        <div className="max-w-screen-lg p-8 bg-black mx-auto">
-          <p className="mb-5 text-white text-center">
-            Call Us: +88 01786727749
+        <div className="max-w-screen-lg p-6 bg-gradient-to-r from-gray-900 via-gray-800 to-black mx-auto rounded-lg shadow-lg">
+          <p className="text-white text-center text-lg sm:text-xl md:text-2xl font-semibold">
+            Call Us:{" "}
+            <span className="text-yellow-400 hover:text-yellow-300 transition-colors duration-200">
+              +88 01786727749
+            </span>
           </p>
         </div>
+
         <SectionTitle
           subHeading="---Should Try---"
           heading="CHEF RECOMMENDS"
